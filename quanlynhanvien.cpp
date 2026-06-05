@@ -1,43 +1,52 @@
 #include<iostream>
 using namespace std;
-#include "quanlynhanvien.h"
+// #include "quanlynhanvien.h"
+#include "gioithieu.h"
+#include "baocao.h"
 int main() {
+    gioithieu();
     int chucvu = chonchucvu(); 
+    system("cls");
     quanlynhanvien qlnv;
     // qlnv.docfile();
-    int chon;
+    int chon1;
+    int chon2;
     int tiep;
     do {
         cout << "+==========================================================+" << endl;
-        cout << "|                  MENU QUAN LY NHAN VIEN                  |" << endl;
+        cout << "|         MENU QU?N L? NHÂN VIÊN CÔNG TY PH?N M?M          |" << endl;
         cout << "+====+=====================================================+" << endl;
-        cout << "| STT|             CHUC NANG CHUONG TRINH                  |" << endl;
+        cout << "| STT|             CH?C NÃNG CHÝÕNG TR?NH                  |" << endl;
         cout << "+----+-----------------------------------------------------+" << endl;
         if(chucvu == 1) { 
-            cout << "| [1]| Nhap danh sach nhan vien ban dau                    |" << endl;
-            cout << "| [2]| Xem danh sach nhan vien                             |" << endl;
-            cout << "| [3]| Tim kiem nhan vien                                  |" << endl;
-            cout << "| [4]| Cap nhat thong tin nhan vien                        |" << endl;
-            cout << "| [5]| Them nhan vien                                      |" << endl;
-            cout << "| [6]| Xoa thong tin nhan vien                             |" << endl;
-            cout << "| [7]| Sap xep nhan vien theo ten nhan vien                |" << endl;
-            cout << "| [8]| Lich su dang nhap                                   |" << endl;
-            cout << "| [9]| Tinh tong luong phai tra cho toan cong ty           |" << endl;
-            cout <<"| [10]| Tong so luong nhan vien trong cong ty               |" << endl;
+            cout <<"| [1]| Nh?p danh sách nhân viên ban ð?u                    |" << endl;
+            cout <<"| [2]| Xem danh sách nhân viên công ty                     |" << endl;
+            cout <<"| [3]| T?m ki?m nhân viên                                  |" << endl;
+            cout <<"| [4]| C?p nh?t thông tin nhân viên                        |" << endl;
+            cout <<"| [5]| Thêm nhân viên                                      |" << endl;
+            cout <<"| [6]| Xóa thông tin nhân viên                             |" << endl;
+            cout <<"| [7]| S?p x?p thành tích nhân viên                        |" << endl;
+            cout <<"| [8]| Xem l?ch s? ðãng nh?p                               |" << endl;
+            cout <<"| [9]| Xem báo cáo t? nhân viên                            |" << endl;
+            cout <<"| [10]| T?ng s? nhân viên trong công ty                    |" << endl;
+            cout <<"| [0]| Thoát chýõng tr?nh                                  |" << endl;
+            cout <<"+----+-----------------------------------------------------+" << endl;
+            cout << "Nh?p l?a ch?n c?a b?n: ";
+            cin >> chon1;
+            cin.ignore();
         } 
         else if(chucvu == 2) { 
-            cout << "| [2]| Xem danh sach nhan vien                              |" << endl;
-            cout << "| [3]| Tim kiem nhan vien                                   |" << endl;
+            cout <<"| [1]| Xem thông tin cá nhân                               |" << endl;
+            cout <<"| [2]| Báo cáo v?n ð? c?n gi?i quy?t                       |" << endl;
+            cout <<"| [0]| Thoát chýõng tr?nh                                  |" << endl;
+            cout <<"+----+-----------------------------------------------------+" << endl;
+            cout << "Nh?p l?a ch?n c?a b?n: ";
+            cin >> chon2;
+            cin.ignore();
         }
-    
-        cout << "| [0]| Thoat chuong trinh                                  |" << endl;
-        cout << "+----+-----------------------------------------------------+" << endl;
-        cout << "Nhap lua chon cua ban: ";
-        cin >> chon;
-        cin.ignore();
-
-        switch(chon) {
+        switch(chon1) {
             case 1:
+            system("cls");
                 if (chucvu == 1) {
                     qlnv.nhap();
                 } else {
@@ -45,26 +54,40 @@ int main() {
                 }
                 break;
                 
-            case 2: 
+            case 2:
+            system("cls"); 
                qlnv.docfile();
                 qlnv.xuat(); 
                 break;
             case 3: {
-                int manv;
-                cout << "Nhap ma nhan vien can tim: ";
-                cin >> manv;
-                cin.ignore();
-                qlnv.timkiemtheomanv(manv);
+                system("cls");
+                int mnv;
+                 while (true) {
+            cout << "Nh?p m? nhân viên c?a b?n: ";
+           if (cin >> mnv && mnv > 0 && to_string(mnv).length() == 6) {
+            cin.ignore(); 
+            break;
+        } else {
+            cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
+        }
+    }
+                qlnv.timkiemtheomanv(mnv);
                 break;
             }
             
             case 4:
                 if (chucvu == 1) {
-                    int manv;
-                    cout << "Nhap ma nhan vien can cap nhat: ";
-                    cin >> manv;
-                    cin.ignore();
-                     qlnv.updatenhanvien(manv);
+                    int mnv;
+            while (true) {
+                 cout << "Nh?p m? nhân viên c?a b?n: ";
+               if (cin >> mnv && mnv > 0 && to_string(mnv).length() == 6) {
+               cin.ignore(); 
+               break;
+           } else {
+              cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
+          }
+       }
+                     qlnv.updatenhanvien(mnv);
                 } else {
                     cout << "[-] Ban khong co quyen dung chuc nang nay!" << endl;
                 }
@@ -104,8 +127,7 @@ int main() {
                 break;
             case 9:
                 if (chucvu == 1) {
-                      qlnv.docfile();
-                      cout << "Tong luong phai tra cho toan cong ty: " << qlnv.tinhtongluong() << endl;
+                      docfilebaocao();
                 } else {
                     cout << "[-] Ban khong co quyen dung chuc nang nay!" << endl;
                 }
@@ -119,15 +141,36 @@ int main() {
                 break;
 
             default:
-                cout << "Lua chon khong hop le!" << endl;
-                break;
+                
+        switch(chon2){
+            case 1:
+            int mnv;
+             while (true) {
+            cout << "Nh?p m? nhân viên c?a b?n: ";
+           if (cin >> mnv && mnv > 0 && to_string(mnv).length() == 6) {
+            cin.ignore(); 
+            break;
+        } else {
+            cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
         }
-cout << "Ban co muon tiep tuc khong? (0: Co, 1: Khong): ";
+    }
+            qlnv.timkiemtheomanv(mnv);
+            break;
+            case 2:
+            ghifilebaocao(qlnv);
+            break;
+            case 0:
+            exit(0);
+        }
+        }
+        if(chon1!=0 && chon2!=0){
+cout << "B?n có mu?n ti?p t?c không? (0: Có, 1: Không): ";
         cin >> tiep;
         cin.ignore();
-        if(tiep!=0){
-            cout << "Da thoat chuong trinh." << endl;
+        if(tiep==1){
+            cout << "B?n ð? thoát kh?i chýõng tr?nh." << endl;
         }
+    }
     } while (tiep ==0); 
     return 0;
 }

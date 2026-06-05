@@ -1,1 +1,1 @@
-123123|8|lai|Nam|35|thon5|9999999999|lai@gmail.com|lap trinh vien|1000008|Python|5|AI.
+123456|9|lai|Nam|19|thon6|0905170479|ro@gmail.com|kiem thu vien|150009|KTMT|2|3.

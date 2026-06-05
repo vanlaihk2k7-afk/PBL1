@@ -9,12 +9,12 @@ string username;
 void docfilelichsu(){
     ifstream file("lichsudangnhap.txt");
     if (!file.is_open()) {
-        cout << "Loi: Khong the mo file hoac file chua ton tai!" << endl;
+        cout << "không thể mở file!" << endl;
         return;
     }
     string thuocdong(18,' ');
     string line;
-    cout  <<thuocdong << "LICH SU DANG NHAP" << endl;
+    cout  <<thuocdong << "LỊCH SỬ ĐĂNG NHẬP" << endl;
     cout  << "+----------------------------------------------------+" << endl;
     while (getline(file, line)) {
         if (line.empty()) continue; 
@@ -26,44 +26,53 @@ void docfilelichsu(){
 void ghifilelichsu(){
     ofstream file("lichsudangnhap.txt", ios::app); 
     if (file.is_open()) {
-        file << "Username: " << username << " - Dang nhap thanh cong!" << endl;
+        file << "Username: " << username << " - Đã đăng nhập thành công!" << endl;
         file.close();
     } else {
-        cout << "Loi: Khong the mo file de ghi!" << endl;
+        cout << "Không thể ghi file!" << endl;
     }
 }
 
 void kiemTraDangNhapquanly(){
+    system("cls");
+    cout<<"Đăng nhập bằng tài khoản quản lý"<<endl;
     cout<<"Username: ";
         getline(cin, username);
     do {
     cout << "Password: ";
     getline(cin, key);
     if (key == "123456") {
-        cout << "Dang nhap thanh cong!" << endl;
-        ghifilelichsu(); // Ghi lịch sử đăng nhập vào file
+        cout << "Đăng nhập thành công!" << endl;
+        ghifilelichsu(); // Ghi lịch sử đăng nhập vào file lichsudangnhap.txt
     } else {
-        cout << "Mat khau sai! Vui long thu lai." << endl;
+        cout << "Mật khẩu sai. Vui lòng thử lại!" << endl;
     }
 } while (key != "123456");
 }
 void kiemTraDangNhapnhanvien(){
+    system("cls");
+    cout<<"Đăng nhập bằng tài khoản nhân viên"<<endl;
     cout<<"Username: ";
         getline(cin, username);
     do {
     cout << "Password: ";
     getline(cin, key);
     if (key == "123") {
-        cout << "Dang nhap thanh cong!" << endl;
-        ghifilelichsu(); // Ghi lịch sử đăng nhập vào file
+        cout << "Đăng nhập thành công!" << endl;
+        ghifilelichsu();
     } else {
-        cout << "Mat khau sai! Vui long thu lai." << endl;
+        cout << "Mật khẩu sai. Vui lòng thử lại!" << endl;
     }
 } while (key != "123");
 }
 int chonchucvu(){
     int chucvu;
-    cout << "Chon chuc vu (1: Quan ly, 2: Nhan vien): ";
+    cout<<"-----------MENU CHÍNH---------"<<endl;
+    cout<<"Chức vụ:"<<endl;
+    cout<<"1:Quản lý"<<endl;
+    cout<<"2:Nhân viên"<<endl;
+    cout<<"0:Thoát chương trình"<<endl;
+    cout << "Vui lòng chọn chức vụ của bạn:";
     cin >> chucvu;
     cin.ignore();
     switch(chucvu) {
@@ -73,8 +82,11 @@ int chonchucvu(){
         case 2:
             kiemTraDangNhapnhanvien();
             return 2;
+        case 0:
+        cout<<"Đã thoát";
+            exit(0);
         default:
-            cout << "Lua chon khong hop le! Vui long thu lai." << endl;
+            cout << "Lựa chọn của bạn không hợp lệ! Vui lòng thử lại." << endl;
             return chonchucvu(); 
     }
 }

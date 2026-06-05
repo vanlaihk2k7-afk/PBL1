@@ -8,6 +8,8 @@
 #include <iomanip>  
 #include <algorithm>
 #include <sstream>
+#include <cstdlib>//thư viện để dùng system("cls")
+
 using namespace std;
 class quanlynhanvien{
     private:
@@ -44,14 +46,14 @@ quanlynhanvien::~quanlynhanvien(){
 }
 void quanlynhanvien::nhap() {
 
-    cout << "----------------Nhap thong tin nhan vien----------------" << endl;
-    cout << "Nhap so luong nhan vien muon them: ";
+    cout << "----------------Nhập thông tin nhân viên----------------" << endl;
+    cout << "Nhập số lượng nhân viên muốn thêm: ";
     cin >> n;
     cin.ignore();
     ds = new nhanvien*[n];
 
     for (int i = 0; i < n; i++) {
-        cout << "Nhap thong tin nhan vien thu " << i + 1 << ":" << endl;
+        cout << "Nhập thông tin nhân viên thứ " << i + 1 << ":" << endl;
         int chucvu;
         cout << "Chon chuc vu nhan vien (1: Lap trinh vien, 2: Kiem thu vien, 3: Ke toan, 4: Nhan vien quan ly): ";
         cin >> chucvu;
@@ -80,9 +82,9 @@ void quanlynhanvien::nhap() {
 }
 
 void quanlynhanvien::xuat(){
-    cout<<"----------------------------------------------------------Danh sach nhan vien----------------------------------------------------------------+" << endl;
+    cout<<"----------------------------------------------------------DANH SÁCH NHÂN VIÊN----------------------------------------------------------------+" << endl;
     cout<<"+----+--------+-------------+-------------+-------+-------------------+---------------+-----------------+----------------+--------------------"<<endl;
-    cout<<"| STT|  MNV   |  Ten        |  Gioi tinh  | Tuoi  | Dia chi           | So dien thoai | Email           | Chuc vu        |Luong              |"<<endl;
+    cout<<"| STT|  MNV   |  Tên        |  Gioi tinh  | Tuổi  | Điạ chỉ           | Số điện thoại | Email           | Chức vụ        |Lương              |"<<endl;
     cout<<"+----+--------+-------------+-------------+-------+-------------------+---------------+-----------------+----------------+--------------------"<<endl;
     
     for(int i=0; i<n; i++){
@@ -257,10 +259,9 @@ void quanlynhanvien::docfile() {
     }
     file.close();
 
-    cout << "=> Doc file thanh cong! Da nap " << n << " nhan vien vao chuong trinh." << endl;
+    cout << "Doc file thanh cong! Da nap " << n << " nhan vien vao chuong trinh." << endl;
 
 }
-
 void quanlynhanvien::timkiemtheomanv(int manv){
     docfile();
     for(int i=0; i<n; i++){
