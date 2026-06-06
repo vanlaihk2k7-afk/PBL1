@@ -1,2 +1,4 @@
 Mã NV: 120120- Nội dung báo cáo: t�i mu?n tang luong
 Mã NV: 123456- Nội dung báo cáo: toi muon tang ca
+Mã NV: 123456- Nội dung báo cáo: hu d�n
+Mã NV: 0- Nội dung báo cáo: tang ca

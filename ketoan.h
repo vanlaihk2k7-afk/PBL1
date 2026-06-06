@@ -17,7 +17,6 @@ class ketoan: public nhanvien{
     string getchucvu();
     string setchuyennganh(string chuyennganh);
     int setsogiolamthem(int sogiolamthem);
-    
 };
 ketoan::ketoan(){
     this->setchucvu("ke toan");

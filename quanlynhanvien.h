@@ -23,11 +23,10 @@ class quanlynhanvien{
     void xuat();
     void ghifile();
     void docfile();
-    void timkiemtheomanv(int manv);
+    void timkiemtheomanv();
     void addnhanvien();
     void deletenhanvien(int manv);
     void updatenhanvien(int manv);
-    void sapxeptheoten();
     void lichsudangnhap();
     long long tinhtongluong();
     void tinhtongnhanvien();
@@ -235,9 +234,7 @@ void quanlynhanvien::docfile() {
             nv = new nhanvienquanly();
         } else {
             continue;
-
         }
-
         nv->setmanv(ma);
         nv->setluongcoban(luongcb);
         nv->setten(ten);
@@ -258,12 +255,19 @@ void quanlynhanvien::docfile() {
         n++;         
     }
     file.close();
-
-    cout << "Doc file thanh cong! Da nap " << n << " nhan vien vao chuong trinh." << endl;
-
 }
-void quanlynhanvien::timkiemtheomanv(int manv){
+void quanlynhanvien::timkiemtheomanv(){
     docfile();
+    int manv;
+                 while (true) {
+                cout << "Nh?p m? nhân viên c?a b?n: ";
+                if (cin >> manv && manv > 0 && to_string(manv).length() == 6) {
+                cin.ignore(); 
+                break;
+              } else {
+              cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
+               }
+             }
     for(int i=0; i<n; i++){
         if(ds[i]->getmanv()==manv){
             cout<<"Thong tin nhan vien co ma nhan vien "<<manv<<":"<<endl;
@@ -343,7 +347,6 @@ void quanlynhanvien::updatenhanvien(int manv){
         if(ds[i]->getmanv()==manv){
             a=i;
             break;
-
         }
     }
     if(a==-1){
@@ -352,15 +355,6 @@ void quanlynhanvien::updatenhanvien(int manv){
     }
     ds[a]->nhap();
     ghifile();
-}
-void quanlynhanvien::sapxeptheoten(){
-    for(int i=0; i<n-1; i++){
-        for(int j=0; j<n-i-1; j++){
-            if(ds[j]->getten()>ds[j+1]->getten()){
-                swap(ds[j], ds[j+1]);
-            }
-        }
-    }
 }
 void quanlynhanvien::lichsudangnhap(){
     docfilelichsu();

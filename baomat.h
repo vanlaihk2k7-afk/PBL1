@@ -18,7 +18,7 @@ void docfilelichsu(){
     cout  << "+----------------------------------------------------+" << endl;
     while (getline(file, line)) {
         if (line.empty()) continue; 
-        cout << "| " << left << setw(50) << line << " |" << endl;
+        cout << "| " << left << setw(58) << line << " |" << endl;
     }
     cout << "+----------------------------------------------------+" << endl;
     file.close();

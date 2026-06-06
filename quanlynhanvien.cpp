@@ -1,6 +1,5 @@
 #include<iostream>
 using namespace std;
-// #include "quanlynhanvien.h"
 #include "gioithieu.h"
 #include "baocao.h"
 int main() {
@@ -8,7 +7,6 @@ int main() {
     int chucvu = chonchucvu(); 
     system("cls");
     quanlynhanvien qlnv;
-    // qlnv.docfile();
     int chon1;
     int chon2;
     int tiep;
@@ -25,10 +23,9 @@ int main() {
             cout <<"| [4]| C?p nh?t thông tin nhân viên                        |" << endl;
             cout <<"| [5]| Thêm nhân viên                                      |" << endl;
             cout <<"| [6]| Xóa thông tin nhân viên                             |" << endl;
-            cout <<"| [7]| S?p x?p thành tích nhân viên                        |" << endl;
-            cout <<"| [8]| Xem l?ch s? ðãng nh?p                               |" << endl;
-            cout <<"| [9]| Xem báo cáo t? nhân viên                            |" << endl;
-            cout <<"| [10]| T?ng s? nhân viên trong công ty                    |" << endl;
+            cout <<"| [7]| Xem l?ch s? ðãng nh?p                               |" << endl;
+            cout <<"| [8]| Xem báo cáo t? nhân viên                            |" << endl;
+            cout <<"| [9]| T?ng lýõng c?a nhân viên trong công ty              |" << endl;
             cout <<"| [0]| Thoát chýõng tr?nh                                  |" << endl;
             cout <<"+----+-----------------------------------------------------+" << endl;
             cout << "Nh?p l?a ch?n c?a b?n: ";
@@ -61,20 +58,9 @@ int main() {
                 break;
             case 3: {
                 system("cls");
-                int mnv;
-                 while (true) {
-            cout << "Nh?p m? nhân viên c?a b?n: ";
-           if (cin >> mnv && mnv > 0 && to_string(mnv).length() == 6) {
-            cin.ignore(); 
-            break;
-        } else {
-            cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
-        }
-    }
-                qlnv.timkiemtheomanv(mnv);
+                qlnv.timkiemtheomanv();
                 break;
             }
-            
             case 4:
                 if (chucvu == 1) {
                     int mnv;
@@ -111,37 +97,28 @@ int main() {
                     cout << "[-] Ban khong co quyen dung chuc nang nay!" << endl;
                 }
                 break;
-            case 7:
+            case 7: 
                 if (chucvu == 1) {
-                    // qlnv.sapxeptheoten();
-                } else {
-                    cout << "[-] Ban khong co quyen dung chuc nang nay!" << endl;
-                }
-                break;
-            case 8: 
-                if (chucvu == 1) {
+                    system("cls");
                     qlnv.lichsudangnhap();
                 } else {
                     cout << " Ban khong co quyen dung chuc nang nay!" << endl;
                 }
                 break;
-            case 9:
+            case 8:
                 if (chucvu == 1) {
+                     system("cls");
                       docfilebaocao();
                 } else {
                     cout << "[-] Ban khong co quyen dung chuc nang nay!" << endl;
                 }
                 break;
-            case 10:
-              qlnv.tinhtongnhanvien();
+            case 9:
+              qlnv.tinhtongluong();
                break;
-                
-             case 0:
-                cout << "Da thoat chuong trinh." << endl;
-                break;
-
+            case 0:
+                exit(0);
             default:
-                
         switch(chon2){
             case 1:
             int mnv;
@@ -154,7 +131,7 @@ int main() {
             cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
         }
     }
-            qlnv.timkiemtheomanv(mnv);
+            qlnv.timkiemtheomanv();
             break;
             case 2:
             ghifilebaocao(qlnv);
@@ -166,6 +143,7 @@ int main() {
         if(chon1!=0 && chon2!=0){
 cout << "B?n có mu?n ti?p t?c không? (0: Có, 1: Không): ";
         cin >> tiep;
+        system("cls");
         cin.ignore();
         if(tiep==1){
             cout << "B?n ð? thoát kh?i chýõng tr?nh." << endl;

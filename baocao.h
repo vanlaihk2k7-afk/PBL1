@@ -24,16 +24,7 @@ void docfilebaocao(){
 void ghifilebaocao(quanlynhanvien &ql){
     int manv;
     string nd;
-    while (true) {
-            cout << "Nhập mã nhân viên của bạn: ";
-           if (cin >> manv && manv > 0 && to_string(manv).length() == 6) {
-            cin.ignore(); 
-            break;
-        } else {
-            cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
-        }
-    }
-    ql.timkiemtheomanv(manv);
+    ql.timkiemtheomanv();
     system("cls");
     cout<<"Nhập nội dung báo cáo: ";
     getline(cin,nd);
