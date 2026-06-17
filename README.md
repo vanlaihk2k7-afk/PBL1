@@ -33,4 +33,4 @@ Lớp Derived (ChucVu): Thừa kế từ NhanVien, bổ sung thuộc tính riên
 📝 Liên hệ (Contact)  
 Người phát triển: [Lê Văn Lai, Hồ Nguyễn Nhật Huy]  
 Email: [vanlaihk2k7@gmail.com]  
-GitHub: [Link profile của bạn]  
+GitHub: [https://github.com/vanlaihk2k7-afk/PBL1.git]  
