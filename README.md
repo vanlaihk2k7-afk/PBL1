@@ -1,13 +1,13 @@
-🏢 Hệ thống Quản lý Nhân sự (HRM System)
-📖 Giới thiệu (Overview)
-Hệ thống Quản lý Nhân sự (HRM) là một phần mềm được phát triển bằng ngôn ngữ C++. Dự án nhằm mục đích tối ưu hóa việc quản lý dữ liệu nhân viên trong các công ty phần mềm, hỗ trợ các chức năng cơ bản từ quản lý thông tin cá nhân đến tính toán lương tự động dựa trên vị trí công việc.
-🚀 Tính năng chính (Key Features)
-Quản lý dữ liệu: Thêm, xóa, cập nhật và hiển thị danh sách nhân viên.
-Cấu trúc dữ liệu linh hoạt: Sử dụng lập trình hướng đối tượng (OOP) để quản lý các đối tượng nhân viên khác nhau.
-Tính lương tự động: Cơ chế tính lương linh hoạt tùy thuộc vào chức vụ (Lập trình viên, Kiểm thử, Kế toán, v.v.).
-Giao diện trực quan: Bảng dữ liệu được căn chỉnh khoa học, dễ nhìn ngay trên cửa sổ Terminal.
-🛠 Công nghệ sử dụng (Tech Stack)
-Ngôn ngữ: C++.
+🏢 Hệ thống Quản lý Nhân sự (HRM System)   
+📖 Giới thiệu (Overview)   
+Hệ thống Quản lý Nhân sự (HRM) là một phần mềm được phát triển bằng ngôn ngữ C++. Dự án nhằm mục đích tối ưu hóa việc quản lý dữ liệu nhân viên trong các công ty phần mềm, hỗ trợ các chức năng cơ bản từ quản lý thông tin cá nhân đến tính toán lương tự động dựa trên vị trí công việc.   
+🚀 Tính năng chính (Key Features)  
+Quản lý dữ liệu: Thêm, xóa, cập nhật và hiển thị danh sách nhân viên.  
+Cấu trúc dữ liệu linh hoạt: Sử dụng lập trình hướng đối tượng (OOP) để quản lý các đối tượng nhân viên khác nhau.  
+Tính lương tự động: Cơ chế tính lương linh hoạt tùy thuộc vào chức vụ (Lập trình viên, Kiểm thử, Kế toán, v.v.).  
+Giao diện trực quan: Bảng dữ liệu được căn chỉnh khoa học, dễ nhìn ngay trên cửa sổ Terminal.  
+🛠 Công nghệ sử dụng (Tech Stack)  
+Ngôn ngữ: C++.  
 Thư viện: * <iostream>, <string>: Quản lý dữ liệu.
 <iomanip>: Định dạng bảng và xuất dữ liệu.
 <fstream>: Hỗ trợ đọc/ghi dữ liệu từ file.
