@@ -8,29 +8,29 @@ Tính lương tự động: Cơ chế tính lương linh hoạt tùy thuộc và
 Giao diện trực quan: Bảng dữ liệu được căn chỉnh khoa học, dễ nhìn ngay trên cửa sổ Terminal.  
 🛠 Công nghệ sử dụng (Tech Stack)  
 Ngôn ngữ: C++.  
-Thư viện: * <iostream>, <string>: Quản lý dữ liệu.
-<iomanip>: Định dạng bảng và xuất dữ liệu.
-<fstream>: Hỗ trợ đọc/ghi dữ liệu từ file.
-Môi trường: IDE (Visual Studio Code, Dev-C++), Git/GitHub.
-💻 Hướng dẫn cài đặt (Installation)
-Clone dự án:
-git clone https://github.com/vanlaihk2k7-afk/PBL1.git
-Biên dịch:
-Mở terminal tại thư mục dự án và sử dụng lệnh:
-g++ -o HRM_System main.cpp quanly.cpp nhanvien.cpp
-Thực thi:
-Sau khi biên dịch thành công, chạy file thực thi vừa tạo bằng lệnh sau:
--Trên Windows:
-HRM_System.exe
--Trên Linux hoặc macOS:
-./HRM_System
-📊 Mô hình dữ liệu (Data Structure)
-Để hiểu rõ cách chương trình vận hành, dưới đây là mô hình phân cấp lớp (Class Hierarchy) của hệ thống:
-Lớp Base (NhanVien): Lưu trữ thông tin chung (Tên, tuổi, địa chỉ, số điện thoại, email, lương cơ bản...).
-Lớp Derived (ChucVu): Thừa kế từ NhanVien, bổ sung thuộc tính riêng và hàm tính lương đặc thù.
-📸 Hình ảnh minh họa (Preview)
-<img width="1037" height="176" alt="image" src="https://github.com/user-attachments/assets/a06544cf-0c5b-4acc-ab0a-745c55818ae7" />
-📝 Liên hệ (Contact)
-Người phát triển: [Lê Văn Lai, Hồ Nguyễn Nhật Huy]
-Email: [vanlaihk2k7@gmail.com]
-GitHub: [Link profile của bạn]
+Thư viện: * <iostream>, <string>: Quản lý dữ liệu.  
+<iomanip>: Định dạng bảng và xuất dữ liệu.  
+<fstream>: Hỗ trợ đọc/ghi dữ liệu từ file.  
+Môi trường: IDE (Visual Studio Code, Dev-C++), Git/GitHub.  
+💻 Hướng dẫn cài đặt (Installation)  
+Clone dự án:  
+git clone https://github.com/vanlaihk2k7-afk/PBL1.git  
+Biên dịch:  
+Mở terminal tại thư mục dự án và sử dụng lệnh:  
+g++ -o HRM_System quanlynhanvien.cpp  
+Thực thi:  
+Sau khi biên dịch thành công, chạy file thực thi vừa tạo bằng lệnh sau:  
+-Trên Windows:  
+HRM_System.exe  
+-Trên Linux hoặc macOS:  
+./HRM_System  
+📊 Mô hình dữ liệu (Data Structure)  
+Để hiểu rõ cách chương trình vận hành, dưới đây là mô hình phân cấp lớp (Class Hierarchy) của hệ thống:  
+Lớp Base (NhanVien): Lưu trữ thông tin chung (Tên, tuổi, địa chỉ, số điện thoại, email, lương cơ bản...).  
+Lớp Derived (ChucVu): Thừa kế từ NhanVien, bổ sung thuộc tính riêng và hàm tính lương đặc thù.  
+📸 Hình ảnh minh họa (Preview)  
+<img width="1037" height="176" alt="image" src="https://github.com/user-attachments/assets/a06544cf-0c5b-4acc-ab0a-745c55818ae7" />  
+📝 Liên hệ (Contact)  
+Người phát triển: [Lê Văn Lai, Hồ Nguyễn Nhật Huy]  
+Email: [vanlaihk2k7@gmail.com]  
+GitHub: [Link profile của bạn]  
