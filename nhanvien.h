@@ -11,16 +11,16 @@ class nhanvien{
     string email;
     int manv;
     string chucvu;
-    long long luongcoban;
+    double luongcoban;
+    double luongthucte;
     public:
-    static int tongnv;
     nhanvien();
-    nhanvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, long long luongcoban);
+    nhanvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, double luongcoban);
     virtual ~nhanvien();
     virtual void nhap();
     virtual void xuat();
-    virtual long long tinhluong()=0;
-    long long getluongcoban();
+    virtual double tinhluong()=0;
+    double getluongcoban();
     int getmanv();
     string getten();
     bool getgioitinh();
@@ -37,10 +37,9 @@ class nhanvien{
     void setemail(string email);
     void setmanv(int manv);
     void setchucvu(string chucvu);
-    void setluongcoban(long long luongcoban);
-    static int gettongnv();
+    void setluongcoban(double luongcoban);
+    void setluongthucte(double luongthucte);
 };
-int nhanvien::tongnv=0;
 nhanvien::nhanvien(){
     name="";
     gioitinh=false;
@@ -51,9 +50,8 @@ nhanvien::nhanvien(){
     chucvu="";
     manv=0;
     luongcoban=0;
-    tongnv++;
 }
-nhanvien::nhanvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, long long luongcoban){
+nhanvien::nhanvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, double luongcoban){
     this->name=name;
     this->gioitinh=gioitinh;
     this->tuoi=tuoi;
@@ -65,55 +63,54 @@ nhanvien::nhanvien(string name, bool gioitinh, int tuoi, string diachi, string s
     this->luongcoban=luongcoban;
 }
 nhanvien::~nhanvien(){
-    tongnv--;
 }
 void nhanvien::nhap() {
     while (true) {
-        cout << "Nhap ten nhan vien: ";
+        cout << "Nhập tên nhân viên: ";
         getline(cin, name);
         bool tentrue = !name.empty();
         for (char c : name) {
-            if (!isalpha(c) && !isspace(c)) {
+            if (isdigit(c)) {
                 tentrue = false;
                 break;
             }
         }
         if (tentrue) break;
-        cout << "Loi: Ten khong hop le (khong chua so hay ky tu dac biet). Vui long nhap lai!";
+        cout << "Loi: Ten khong hop le (khong chua so hay ky tu dac biet). Vui long nhap lai!"<<endl;
     }
 
     int chonGioiTinh; 
     while (true) {
-        cout << "Nhap gioi tinh (0: Nam, 1: Nu): ";
+        cout << "Nhập giới tính (0: Nam, 1: Nữ): ";
         if (cin >> chonGioiTinh && (chonGioiTinh == 0 || chonGioiTinh == 1)) {
             cin.ignore();
-            gioitinh = (chonGioiTinh == 1); // Nếu chọn 1 thì gioitinh = true (Nữ), chọn 0 thì gioitinh = false (Nam)
+            gioitinh = (chonGioiTinh == 1); //nếu chọn 1 thì gioitinh=true(Nữ)chọn 0 thì gioitinh=false(Nam)
             break;
         } else {
-            cout << "-> Lỗi: Gioi tinh khong hop le! Chi duoc phep nhap 0 (Nam) hoac 1 (Nu).\n";
+            cout << "Giới tính không hợp lệ. Chỉ được phép nhập 0 (Nam) hoac 1 (Nữ)"<<endl;
         }
     }
     int i=0;
     do{
         if(i==0){
-    cout << "Nhap tuoi: ";
+    cout << "Nhập tuổi: ";
     cin >> tuoi;
     cin.ignore();
     i++;
         }
         else{
-            cout << "Nhap lai tuoi: ";
+            cout << "Nhập lại thuổi: ";
             cin >> tuoi;
             cin.ignore();
         }
     }while(tuoi < 18 || tuoi > 65);
 
 
-    cout << "Nhap dia chi: ";
+    cout << "Nhập địa chỉ của bạn: ";
     getline(cin, diachi);
     
     while (true) {
-        cout << "Nhap so dien thoai: ";
+        cout << "Nhập số điện thoại: ";
         getline(cin, sdt);
         bool sdtHopLe = !sdt.empty() && sdt.length() == 10; 
         for (char c : sdt) {
@@ -123,55 +120,53 @@ void nhanvien::nhap() {
             }
         }
         if (sdtHopLe) break;
-        cout << "So dien thoai khong hop le! Vui long nhap lai.\n";
+        cout << "Số điện thoại không hợp lệ. Vui lòng nhập lại"<<endl;
     }
 
     while (true) {
-    cout << "Nhap email: ";
+    cout << "Nhập email: ";
     getline(cin, email);
+    //tìm vị trí của chuỗi "@gmail.com" trong email
+    size_t timkiem = email.find("@gmail.com");
 
-    // 1. Tìm vị trí của chuỗi "@gmail.com" trong email
-    size_t pos = email.find("@gmail.com");
-
-    // 2. Kiểm tra xem "@gmail.com" có tồn tại và nằm ở cuối chuỗi hay không
-    if (pos != string::npos && pos == email.length() - 10) {
+    if (timkiem != string::npos && timkiem == email.length() - 10) {
         break;
     } else {
-    cout << " loi: Email phai co duoi @gmail.com. Vui long nhap lai!\n";
+    cout << "Lỗi: email phải có đuôi @gmail.com. Vui lòng nhập lại"<<endl;
 }
     }
     while (true) {
-        cout << "Nhap ma nhan vien: ";
+        cout << "Nhập mã nhân viên của bạn(6 số): ";
         if (cin >> manv && manv > 0 && to_string(manv).length() == 6) {
             cin.ignore(); 
             break;
         } else {
-            cout << "Loi: Ma nhan vien phai la so nguyen duong va co 6 chu so. Vui long nhap lai!\n"; 
+            cout << "Mã nhân viên của bạn chưa hợp lệ. Vui lòng nhập lại"<<endl; 
         }
     }
 
     while (true) {
-        cout << "Nhap luong co ban(don vi: trieu dong): ";
+        cout << "Nhập lương cơ bản (Triệu đồng): ";
         if (cin >> luongcoban && luongcoban >= 0) {
             cin.ignore(); 
             break;
         } else {
-            cout << " Loi: Luong co ban phai >= 0. Vui long nhap lai!\n";
+            cout << "Lỗi: Lương cơ bản phải >0";
         }
     }
 }
 void nhanvien::xuat(){
-    cout<<"Ten nhan vien: "<<name<<endl;
-    cout<<"Gioi tinh: "<<(gioitinh ? "Nữ" : "Nam")<<endl;
-    cout<<"Tuoi: "<<tuoi<<endl;
-    cout<<"Dia chi: "<<diachi<<endl;
-    cout<<"So dien thoai: "<<sdt<<endl;
+    cout<<"Tên nhân viên: "<<name<<endl;
+    cout<<"Giới tính: "<<(gioitinh ? "Nữ" : "Nam")<<endl;
+    cout<<"Tuổi: "<<tuoi<<endl;
+    cout<<"Địa chỉ: "<<diachi<<endl;
+    cout<<"Số điện thoại: "<<sdt<<endl;
     cout<<"Email: "<<email<<endl;
-    cout<<"Ma nhan vien: "<<manv<<endl;
-    cout<<"Chuc vu: "<<chucvu<<endl;
-    cout<<"Luong co ban: "<<luongcoban<<endl;
+    cout<<"Mã nhân viên: "<<manv<<endl;
+    cout<<"Chức vụ: "<<chucvu<<endl;
+    cout<<"Lương cơ bản: "<<luongcoban<<" Triệu đồng"<<endl;
 }
-long long nhanvien::getluongcoban(){
+double nhanvien::getluongcoban(){
     return luongcoban;
 }
 int nhanvien::getmanv(){
@@ -222,10 +217,7 @@ void nhanvien::setmanv(int manv){
 void nhanvien::setchucvu(string chucvu){
     this->chucvu=chucvu;
 }
-void nhanvien::setluongcoban(long long luongcoban){
+void nhanvien::setluongcoban(double luongcoban){
     this->luongcoban=luongcoban;
-}
-int nhanvien::gettongnv(){
-    return tongnv;
 }
 

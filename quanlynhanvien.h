@@ -24,12 +24,12 @@ class quanlynhanvien{
     void ghifile();
     void docfile();
     void timkiemtheomanv();
+    void kiemtramanv();
     void addnhanvien();
     void deletenhanvien(int manv);
     void updatenhanvien(int manv);
     void lichsudangnhap();
-    long long tinhtongluong();
-    void tinhtongnhanvien();
+    double tinhtongluong();
 };
 quanlynhanvien::quanlynhanvien(){
     ds=NULL;
@@ -54,7 +54,7 @@ void quanlynhanvien::nhap() {
     for (int i = 0; i < n; i++) {
         cout << "Nhập thông tin nhân viên thứ " << i + 1 << ":" << endl;
         int chucvu;
-        cout << "Chon chuc vu nhan vien (1: Lap trinh vien, 2: Kiem thu vien, 3: Ke toan, 4: Nhan vien quan ly): ";
+        cout << "Chọn chức vụ nhân viên(1: Lập trình viên, 2: Kiểm thử viên, 3: Kế toán, 4: Nhân viên quản lý): ";
         cin >> chucvu;
         cin.ignore();
         switch(chucvu) {
@@ -71,7 +71,7 @@ void quanlynhanvien::nhap() {
                 ds[i] = new nhanvienquanly();
                 break;
             default:
-                cout << "Loai nhan vien khong hop le!" << endl;
+                cout << "Loại nhân viên không hợp lệ" << endl;
                 i--;
                 continue;
         }
@@ -81,15 +81,15 @@ void quanlynhanvien::nhap() {
 }
 
 void quanlynhanvien::xuat(){
-    cout<<"----------------------------------------------------------DANH SÁCH NHÂN VIÊN----------------------------------------------------------------+" << endl;
-    cout<<"+----+--------+-------------+-------------+-------+-------------------+---------------+-----------------+----------------+--------------------"<<endl;
-    cout<<"| STT|  MNV   |  Tên        |  Gioi tinh  | Tuổi  | Điạ chỉ           | Số điện thoại | Email           | Chức vụ        |Lương              |"<<endl;
-    cout<<"+----+--------+-------------+-------------+-------+-------------------+---------------+-----------------+----------------+--------------------"<<endl;
+    cout<<"-------------------------------------------------------------DANH SÁCH NHÂN VIÊN------------------------------------------------------------------" << endl;
+    cout<<"+----+--------+------------------+----------+------+-------------------+---------------+-----------------+-------------------+-------------------+"<<endl;
+    cout<<"| STT|  MNV   |  Tên             |Gioi tinh | Tuổi | Điạ chỉ           | Số điện thoại | Email           | Chức vụ           |Lương(Triệu đồng)  |"<<endl;
+    cout<<"+----+--------+------------------+----------+------+-------------------+---------------+-----------------+-------------------+-------------------+"<<endl;
     
     for(int i=0; i<n; i++){
-        cout<<"| "<<i+1<<"  | "<<left<<setw(6)<<ds[i]->getmanv()<<" | "<<left<<setw(11)<<ds[i]->getten()<<" | "<<left<<setw(11)<<(ds[i]->getgioitinh() ? "Nữ" : "Nam")<<" | "<<left<<setw(5)<<ds[i]->gettuoi()<<" | "<<left<<setw(17)<<ds[i]->getdiachi()<<" | "<<left<<setw(13)<<ds[i]->getsdt()<<" | "<<left<<setw(15)<<ds[i]->getemail()<<" | "<<left<<setw(14)<<ds[i]->getchucvu()<<" | "<<left<<setw(17)<<ds[i]->tinhluong()<<" |"<<endl;
+        cout<<"| "<<i+1<<"  | "<<left<<setw(6)<<ds[i]->getmanv()<<" | "<<left<<setw(16)<<ds[i]->getten()<<" | "<<left<<setw(8)<<(ds[i]->getgioitinh() ? "Nu" : "Nam")<<" | "<<left<<setw(4)<<ds[i]->gettuoi()<<" | "<<left<<setw(17)<<ds[i]->getdiachi()<<" | "<<left<<setw(13)<<ds[i]->getsdt()<<" | "<<left<<setw(15)<<ds[i]->getemail()<<" | "<<left<<setw(17)<<ds[i]->getchucvu()<<" | "<<left<<setw(17)<<ds[i]->tinhluong()<<" |"<<endl;
     }
-    cout<<"+----+--------+-------------+-------------+-------+-------------------+---------------+-----------------+----------------+-------------------+"<<endl;
+    cout<<"+----+--------+------------------+----------+------+-------------------+---------------+-----------------+-------------------+-------------------+"<<endl;
 }
 void quanlynhanvien::ghifile() {
     ofstream file("quanlynhanvien.txt", ios::trunc);
@@ -133,16 +133,15 @@ void quanlynhanvien::ghifile() {
             }
         }
         file.close();
-        cout << "=> Da cap nhat toan bo danh sach vao file quanlynhanvien.txt!" << endl;
     } else {
-        cout << "Loi: Khong the mo file de ghi!" << endl;
+        cout << "Lỗi: không thể thêm nhân viên" << endl;
     }
 }
 
 void quanlynhanvien::docfile() {
     ifstream file("quanlynhanvien.txt");
     if (!file.is_open()) {
-        cout << "Loi: Khong the mo file hoac file chua ton tai!" << endl;
+        cout << "Lỗi" << endl;
         return;
     }
     if (ds != NULL) {
@@ -152,6 +151,7 @@ void quanlynhanvien::docfile() {
         delete[] ds;
         ds = NULL;
     }
+    n = 0;
     string dong;
     while (getline(file, dong)) {
         if (dong.empty()) continue;
@@ -169,72 +169,58 @@ void quanlynhanvien::docfile() {
         getline(ss, tinhluong, '|');
 
   nhanvien* nv = NULL;
-        // if(chucvu == "lap trinh vien") {
-        //     laptrinhvien* ltv = new laptrinhvien();
-        //     string ngonngulaptrinh, sogiolamthem, vitridev;
-        //     getline(ss, ngonngulaptrinh, '|');
-        //     getline(ss, sogiolamthem, '|');
-        //     getline(ss, vitridev,'.'); 
-        //     ltv->setngonngulaptrinh(ngonngulaptrinh);
-        //     ltv->setsogiolamthem(stoi(sogiolamthem));
-        //     ltv->setvitridev(vitridev);
-        //     nv = ltv;
-        // } else if (chucvu == "kiem thu vien") {
+        if(chucvu == "lap trinh vien") {
+            laptrinhvien* ltv = new laptrinhvien();
+            string ngonngulaptrinh, sogiolamthem, vitridev;
+            getline(ss, ngonngulaptrinh, '|');
+            getline(ss, sogiolamthem, '|');
+            getline(ss, vitridev,'.'); 
+            ltv->setngonngulaptrinh(ngonngulaptrinh);
+            ltv->setsogiolamthem(stoi(sogiolamthem));
+            ltv->setvitridev(vitridev);
+            nv = ltv;
+        }
+         else if (chucvu == "kiem thu vien") {
 
-        //     string chuyennganh, sogiolamthem, soloiphathien;
-        //     getline(ss, chuyennganh, '|');
-        //     getline(ss, sogiolamthem, '|');
-        //     getline(ss, soloiphathien,'.');
-        //     kiemthuvien* ktv = new kiemthuvien();
-        //     ktv->setchuyennganh(chuyennganh);
-        //     ktv->setsogiolamthem(stoi(sogiolamthem));
-        //     ktv->setsoloiphathien(stoi(soloiphathien));
-        //     nv = ktv;
+            string chuyennganh, sogiolamthem, soloiphathien;
+            getline(ss, chuyennganh, '|');
+            getline(ss, sogiolamthem, '|');
+            getline(ss, soloiphathien,'.');
+            kiemthuvien* ktv = new kiemthuvien();
+            ktv->setchuyennganh(chuyennganh);
+            ktv->setsogiolamthem(stoi(sogiolamthem));
+            ktv->setsoloiphathien(stoi(soloiphathien));
+            nv = ktv;
+         }
 
-        // } else if (chucvu == "ke toan") {
-        //     string chuyennganh, sogiolamthem;
-        //     getline(ss, chuyennganh,'|');
-        //     getline(ss, sogiolamthem,'.');
-        //     ketoan* kt = new ketoan();
-        //     kt->setchuyennganh(chuyennganh);
-        //     kt->setsogiolamthem(stoi(sogiolamthem));
-        //     nv = kt;
-        // } else if (chucvu == "nhan vien quan ly") {
-        //     string soduanquanly, sogiolamthem, soduanhoanthanh;
-        //     getline(ss, soduanquanly, '|');
-        //     getline(ss, sogiolamthem, '|');
-        //     getline(ss, soduanhoanthanh,'.');
-        //     nhanvienquanly* nvql = new nhanvienquanly();
-        //     nvql->setsoduanquanly(stoi(soduanquanly));
-        //     nvql->setsogiolamthem(stoi(sogiolamthem));
-        //     nvql->setsoduanhoanthanh(stoi(soduanhoanthanh));
-        //     nv = nvql;
-        // }else{
-        //     cout << "Loi: Loai chuc vu khong hop le trong file!" << endl;
-        //     continue;
-        // }
+         else if (chucvu == "ke toan") {
+            string chuyennganh, sogiolamthem;
+            getline(ss, chuyennganh,'|');
+            getline(ss, sogiolamthem,'.');
+            ketoan* kt = new ketoan();
+            kt->setchuyennganh(chuyennganh);
+            kt->setsogiolamthem(stoi(sogiolamthem));
+            nv = kt;
+        } else if (chucvu == "nhan vien quan ly") {
+            string soduanquanly, sogiolamthem, soduanhoanthanh;
+            getline(ss, soduanquanly, '|');
+            getline(ss, sogiolamthem, '|');
+            getline(ss, soduanhoanthanh,'.');
+            nhanvienquanly* nvql = new nhanvienquanly();
+            nvql->setsoduanquanly(stoi(soduanquanly));
+            nvql->setsogiolamthem(stoi(sogiolamthem));
+            nvql->setsoduanhoanthanh(stoi(soduanhoanthanh));
+            nv = nvql;
+        }else{
+            cout << "Loi: Loai chuc vu khong hop le trong file!" << endl;
+            continue;
+        }
         
-
         int ma = stoi(manv);
-        long long luongcb = stoll(luongcoban);
+        double luongcb = stoll(luongcoban);
         bool gt = (gioitinh == "Nữ" || gioitinh == "Nu" || gioitinh == "1") ? true : false;
         int tu = stoi(tuoi);
 
-
-        if (chucvu == "lap trinh vien") {
-            nv = new laptrinhvien();
-
-        } else if (chucvu == "kiem thu vien") {
-            nv = new kiemthuvien();
-
-        } else if (chucvu == "ke toan") {
-            nv = new ketoan();
-
-        } else if (chucvu == "nhan vien quan ly") {
-            nv = new nhanvienquanly();
-        } else {
-            continue;
-        }
         nv->setmanv(ma);
         nv->setluongcoban(luongcb);
         nv->setten(ten);
@@ -256,11 +242,41 @@ void quanlynhanvien::docfile() {
     }
     file.close();
 }
+int tam;
 void quanlynhanvien::timkiemtheomanv(){
-    docfile();
+    tam=0;
     int manv;
                  while (true) {
-                cout << "Nh?p m? nhân viên c?a b?n: ";
+                cout << "Nhập mã nhân viên của bạn: ";
+                if (cin >> manv && manv > 0 && to_string(manv).length() == 6) {
+                cin.ignore(); 
+                break;
+              } else {
+              cout << "Lỗi"<<endl; 
+               }
+             }
+    for(int i=0; i<n; i++){
+        if(ds[i]->getmanv()==manv){
+            system("cls");
+            cout<<"Thông tin nhân viên có mã số "<<manv<<":"<<endl;
+            cout<<"+--------------------------------------------------------------THÔNG TIN CHUNG NHÂN VIÊN-----------------------------------------------------------------------------------+" << endl;
+            cout<<"| STT| Tên nhân viên             |   Giới tính     | Tuổi  | Địa chỉ                 | Số điện thoại   | Email           | Chức vụ                 |Lương(Triệu đồng)      |"<<endl;
+            cout<<"+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+"<<endl;
+            cout<<"| 1  | "<<left<<setw(25)<<ds[i]->getten()<<" | "<<left<<setw(15)<<(ds[i]->getgioitinh() ? "Nữ" : "Nam")<<" | "<<left<<setw(7)<<ds[i]->gettuoi()<<" | "<<left<<setw(23)<<ds[i]->getdiachi()<<" | "<<left<<setw(15)<<ds[i]->getsdt()<<" | "<<left<<setw(15)<<ds[i]->getemail()<<" | "<<left<<setw(23)<<ds[i]->getchucvu()<<" | "<<left<<setw(21)<<ds[i]->tinhluong()<<" |"<<endl;
+            cout<<"+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+"<<endl;
+            cout<<"+-----------------------------------------------------------THÔNG TIN CHI TIẾT CỦA NHÂN VIÊN-------------------------------------------------------------------------------+"<<endl;
+            ds[i]->xuat();
+            return;
+        }
+    }
+    cout<<"Không tìm thấy nhân viên có mã số "<<manv<<endl;
+    tam++;
+}
+void quanlynhanvien::kiemtramanv(){
+    tam=0;
+    int manv;
+                 while (true) {
+                cout << "Nhập mã nhân viên của bạn: ";
                 if (cin >> manv && manv > 0 && to_string(manv).length() == 6) {
                 cin.ignore(); 
                 break;
@@ -270,21 +286,15 @@ void quanlynhanvien::timkiemtheomanv(){
              }
     for(int i=0; i<n; i++){
         if(ds[i]->getmanv()==manv){
-            cout<<"Thong tin nhan vien co ma nhan vien "<<manv<<":"<<endl;
-            cout<<"----------------------------------------------------------Thong tin nhan vien------------------------------------------------------------------------------------" << endl;
-            cout<<"| STT| Ten nhan vien        |   Gioi tinh     | Tuoi  | Dia chi                 | So dien thoai   | Email           | Chuc vu                 |Luong(Trieu dong) |"<<endl;
-            cout<<"-----------------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
-            cout<<"| 1  | "<<left<<setw(20)<<ds[i]->getten()<<" | "<<left<<setw(15)<<(ds[i]->getgioitinh() ? "Nữ" : "Nam")<<" | "<<left<<setw(5)<<ds[i]->gettuoi()<<" | "<<left<<setw(23)<<ds[i]->getdiachi()<<" | "<<left<<setw(15)<<ds[i]->getsdt()<<" | "<<left<<setw(15)<<ds[i]->getemail()<<" | "<<left<<setw(23)<<ds[i]->getchucvu()<<" | "<<left<<setw(16)<<ds[i]->tinhluong()<<" |"<<endl;
-            cout<<"-----------------------------------------------------------------------------------------------------------------------------------------------------------------"<<endl;
-            ds[i]->xuat();
             return;
         }
     }
-    cout<<"Khong tim thay nhan vien co ma nhan vien "<<manv<<endl;
+    cout<<"Không tìm thấy nhân viên có mã số "<<manv<<endl;
+    tam++;
 }
 void quanlynhanvien::addnhanvien(){
     int loai;
-    cout<<"Chon chuc vu nhan vien (1: Lap trinh vien, 2: Kiem thu vien, 3: Ke toan, 4: Nhan vien quan ly): ";
+    cout<<"Chọn vị trí nhân viên (1: Lập trình viên, 2: Kiểm thử viên, 3: Kế toán, 4: Nhân viên quản lý nhân sự): ";
     cin>>loai;
     cin.ignore();
     nhanvien *nv=NULL;
@@ -294,7 +304,7 @@ void quanlynhanvien::addnhanvien(){
         case 3: nv = new ketoan(); break;
         case 4: nv = new nhanvienquanly(); break;
         default:
-            cout << "=> Lua chon khong hop le!" << endl;
+            cout << "LỰA CHỌN CỦA BẠN KHÔNG HỢP LỆ" << endl;
             return;
     }
     nv->nhap();
@@ -309,7 +319,6 @@ void quanlynhanvien::addnhanvien(){
     ghifile();
 }
 void quanlynhanvien::deletenhanvien(int manv){
-    docfile();
     int a = -1;
     for(int i = 0; i < n; i++){
         if(ds[i]->getmanv() == manv){
@@ -318,7 +327,7 @@ void quanlynhanvien::deletenhanvien(int manv){
         }
     }
     if(a == -1){
-        cout << "Khong tim thay nhan vien co ma " << manv << endl;
+        cout << "Không tìm thấy nhân viên có mã số " << manv << endl;
         return;
     }
     delete ds[a];
@@ -339,7 +348,7 @@ void quanlynhanvien::deletenhanvien(int manv){
         n--;        
     }
     ghifile();
-    cout << "=> Da xoa nhan vien co ma " << manv << " thanh con!" << endl;
+    cout << "Đã xóa nhân viên có mã số " << manv << " khỏi danh sách" << endl;
 }
 void quanlynhanvien::updatenhanvien(int manv){
     int a=-1;
@@ -350,7 +359,7 @@ void quanlynhanvien::updatenhanvien(int manv){
         }
     }
     if(a==-1){
-        cout<<"Khong tim thay nhan vien co ma "<<manv<<endl;
+        cout<<"Không tìm thấy nhân viên có mã"<<manv<<endl;
         return;
     }
     ds[a]->nhap();
@@ -359,13 +368,10 @@ void quanlynhanvien::updatenhanvien(int manv){
 void quanlynhanvien::lichsudangnhap(){
     docfilelichsu();
 }
-long long quanlynhanvien::tinhtongluong(){
-    long long tongluong=0;
+double quanlynhanvien::tinhtongluong(){
+    double tongluong=0;
     for(int i=0; i<n; i++){
         tongluong+=ds[i]->tinhluong();
     }
     return tongluong;
-}
-void quanlynhanvien::tinhtongnhanvien(){
-    cout<<nhanvien::gettongnv();
 }

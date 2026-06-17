@@ -8,18 +8,18 @@ class kiemthuvien: public nhanvien{
     int sogiolamthem;
     public:
     kiemthuvien();
-    kiemthuvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, long long luongcoban, string chuyennganh, int sogiolamthem, int soloiphathien);
+    kiemthuvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, double luongcoban, string chuyennganh, int sogiolamthem, int soloiphathien);
     ~kiemthuvien();
     void nhap();
     void xuat();
-    long long tinhluong();
+    double tinhluong();
     string getchuyennganh();
     int getsoloiphathien();
     int getsogiolamthem();
     string getchucvu();
-    string setchuyennganh(string chuyennganh);
-    int setsoloiphathien(int soloiphathien);
-    int setsogiolamthem(int sogiolamthem);
+    void setchuyennganh(string chuyennganh);
+    void setsoloiphathien(int soloiphathien);
+    void setsogiolamthem(int sogiolamthem);
 };
 kiemthuvien::kiemthuvien(){
     this->setchucvu("kiem thu vien");
@@ -27,7 +27,7 @@ kiemthuvien::kiemthuvien(){
     soloiphathien=0;
     sogiolamthem=0;
 }
-kiemthuvien::kiemthuvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, long long luongcoban, string chuyennganh, int sogiolamthem, int soloiphathien): nhanvien(name, gioitinh, tuoi, diachi, sdt, email, manv,"kiem thu vien", luongcoban){
+kiemthuvien::kiemthuvien(string name, bool gioitinh, int tuoi, string diachi, string sdt, string email, int manv, string chucvu, double luongcoban, string chuyennganh, int sogiolamthem, int soloiphathien): nhanvien(name, gioitinh, tuoi, diachi, sdt, email, manv,"kiem thu vien", luongcoban){
     this->chuyennganh=chuyennganh;
     this->soloiphathien=soloiphathien;
     this->sogiolamthem=sogiolamthem;
@@ -36,12 +36,12 @@ kiemthuvien::~kiemthuvien(){
 }
 void kiemthuvien::nhap(){
     nhanvien::nhap();
-    cout<<"Nhap chuyen nganh: ";
+    cout<<"Nh?p chuyên ngành h?c c?a b?n: ";
     getline(cin, chuyennganh);
-    cout<<"Nhap so loi phat hien: ";
+    cout<<"Nh?p s? l?i phát hi?n và s?a ðý?c: ";
     cin>>soloiphathien;
     cin.ignore();
-    cout<<"Nhap so gio lam them: ";
+    cout<<"Nh?p s? gi? làm thêm: ";
     cin>>sogiolamthem;
     cin.ignore();
 }
@@ -51,8 +51,8 @@ void kiemthuvien::xuat(){
     cout<<"So loi phat hien: "<<soloiphathien<<endl;
     cout<<"So gio lam them: "<<sogiolamthem<<endl;
 }
-long long kiemthuvien::tinhluong(){
-    return getluongcoban() + sogiolamthem*150000 - soloiphathien*50000;
+double kiemthuvien::tinhluong(){
+    return getluongcoban() + sogiolamthem*0.3 - soloiphathien*0.1;
 }
 string kiemthuvien::getchuyennganh(){
     return chuyennganh;
@@ -65,4 +65,13 @@ int kiemthuvien::getsogiolamthem(){
 }
 string kiemthuvien::getchucvu(){
     return "kiem thu vien";
+}
+void kiemthuvien::setchuyennganh(string chuyennganh){
+    this->chuyennganh=chuyennganh;
+}
+void kiemthuvien::setsoloiphathien(int soloiphathien){
+    this->soloiphathien=soloiphathien;
+}
+void kiemthuvien::setsogiolamthem(int sogiolamthem){
+    this->sogiolamthem=sogiolamthem;
 }

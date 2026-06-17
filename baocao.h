@@ -22,15 +22,17 @@ void docfilebaocao(){
     file.close();
 }
 void ghifilebaocao(quanlynhanvien &ql){
-    int manv;
+    //ql.docfile();
     string nd;
-    ql.timkiemtheomanv();
+    do{
+    ql.kiemtramanv();
+    }while(tam>0);
     system("cls");
     cout<<"Nhập nội dung báo cáo: ";
     getline(cin,nd);
     ofstream file("baocao.txt", ios::app); 
     if (file.is_open()) {
-        file << "Mã NV: " <<manv<<"- Nội dung báo cáo: "<<nd<<endl;
+        file << "Mã NV: " <<" "<<"- Nội dung báo cáo: "<<nd<<endl;
         file.close();
     } else {
         cout << "Không thể ghi file!" << endl;

@@ -9,7 +9,7 @@ string username;
 void docfilelichsu(){
     ifstream file("lichsudangnhap.txt");
     if (!file.is_open()) {
-        cout << "không thể mở file!" << endl;
+        cout << "không thể mở" << endl;
         return;
     }
     string thuocdong(18,' ');
@@ -67,11 +67,12 @@ void kiemTraDangNhapnhanvien(){
 }
 int chonchucvu(){
     int chucvu;
-    cout<<"-----------MENU CHÍNH---------"<<endl;
-    cout<<"Chức vụ:"<<endl;
-    cout<<"1:Quản lý"<<endl;
-    cout<<"2:Nhân viên"<<endl;
-    cout<<"0:Thoát chương trình"<<endl;
+    cout<<"+----------MENU CHÍNH----------+"<<endl;
+    cout<<"|"<<"Chức vụ:"<<setw(23)<<"|"<<endl;
+    cout<<"|"<<"1:Quản lý"<<setw(22)<<"|"<<endl;
+    cout<<"|"<<"2:Nhân viên"<<setw(20)<<"|"<<endl;
+    cout<<"|"<<"0:Thoát"<<setw(24)<<"|"<<endl;
+    cout<<"+------------------------------+"<<endl;
     cout << "Vui lòng chọn chức vụ của bạn:";
     cin >> chucvu;
     cin.ignore();
@@ -86,7 +87,7 @@ int chonchucvu(){
         cout<<"Đã thoát";
             exit(0);
         default:
-            cout << "Lựa chọn của bạn không hợp lệ! Vui lòng thử lại." << endl;
+            cout << "Lựa chọn của bạn không hợp lệ. Vui lòng thử lại." << endl;
             return chonchucvu(); 
     }
 }

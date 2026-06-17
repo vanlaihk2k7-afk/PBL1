@@ -1,1 +1,3 @@
-123456|8|lai|Nam|19|thon 5|0932560494|lai@gmail.com|nhan vien quan ly|2400008|3|3|3.
+111111|9|lai|Ná»¯|19|thon5|1111111111|lai@gmail.com|lap trinh vien|10.2|C++|3|dev.
+123123|7|Thoa|Ná»¯|19|D… N?ng|0385933798|thoa@gmail.com|nhan vien quan ly|9.4|4|3|3.
+222222|7|Lˆ Gia Huy|Nam|25|D… N?ng|0905170479|huy@gmail.com|ke toan|7.4|AI|2.
